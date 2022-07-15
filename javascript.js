@@ -1,36 +1,72 @@
-
+// --Play of the Computer--
 function computerPlay () {
-    const rps = ["Rock", "Paper", "Scissors"];
+    const rps = ["rock", "paper", "scissors"];
     let computerChoice = rps[Math.floor (Math.random () * rps.length)]
     return computerChoice;
 }
 
-function playRound(playerSelection, compSelection) {
-    let playerChoice = playerSelection.toLowerCase();
-    let computerChoice = compSelection.toLowerCase();
+// --One Round of Rock, Paper, Scissors--
+function playRound(playerSelection) {
+    let playerChoice = playerSelection;
+    let computerChoice = computerPlay();
+    //console.log(playerSelection);
+    //console.log(computerChoice);
 
     if (playerChoice === computerChoice) {
-        return "It's a tie!";
+        return score("It's a tie!");
     }else if (playerChoice === "rock" && computerChoice === "scissors") {
-        return "You Win! Rock beats Scissors";
+        return score("You Win! Rock beats Scissors");
     }else if (playerChoice === "scissors" && computerChoice === "paper") {
-        return "You Win! Scissors beats Paper";
+        return score("You Win! Scissors beats Paper");
     }else if (playerChoice === "paper" && computerChoice === "rock") {
-        return "You Win! Paper beats Rock";
+        return score("You Win! Paper beats Rock");
     }else if (playerChoice === "scissors" && computerChoice === "rock") {
-        return "You Lose! Rock beats Scissors";
+        return score("You Lose! Rock beats Scissors");
     }else if (playerChoice === "paper" && computerChoice === "scissors") {
-        return "You Lose! Scissors beats Paper";
+        return score("You Lose! Scissors beats Paper");
     }else /*if (playerChoice === "rock" && computerChoice === "paper")*/ {
-        return "You Lose! Paper beats Rock";
+        return score("You Lose! Paper beats Rock");
     }
 }
 
-//let compSelection = computerPlay();
-//let playerSelection = prompt("Choose between: Rock, Paper and Scissors", "");
-//console.log(playRound(playerSelection, compSelection));
+// --Play of the Player--
+const btn = document.querySelectorAll("button");
+btn.forEach((button => {
+    button.addEventListener('click', () => {playRound(button.className)})
+})); 
 
-function game(){
+// --Score--
+function score(text) {
+    let result = text.toLowerCase();
+    //let humanScore = 0;
+    //let compScore = 0;
+    //let ties = 0;
+    let winner = result.slice (4, 7);
+        if (winner === "win") {
+            humanScore++;
+            console.log(winner, humanScore, compScore);
+        }else if (winner === "los") {
+            compScore++;
+            console.log(winner, humanScore, compScore);
+        }else {
+            ties++;
+            console.log(winner, humanScore, compScore);
+        } return (winner, humanScore, compScore, ties);
+}
+let humanScore = 0;
+let compScore = 0;
+let ties = 0;
+const playerScore = document.querySelector(".playerScore");
+playerScore.textContent = `${humanScore}`
+const computerScore = document.querySelector(".computerScore");
+computerScore.textContent = `${compScore}`;
+const tie = document.querySelector(".ties ");
+tie.textContent = `${ties}`
+
+
+
+// --Game of 5 Rounds--
+/*function game(){
     let playerScore = 0;
     let computerScore = 0;
     let ties = 0;
@@ -52,5 +88,4 @@ function game(){
     return (console.log ("You scored " + playerScore + "! I scored " + computerScore + "! And " + ties + " times was a tie."))
 }
 
-game();
-//console.log(playRound(playerSelection, compSelection));
+game(); */
