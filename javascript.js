@@ -9,8 +9,6 @@ function computerPlay () {
 function playRound(playerSelection) {
     let playerChoice = playerSelection;
     let computerChoice = computerPlay();
-    //console.log(playerSelection);
-    //console.log(computerChoice);
 
     if (playerChoice === computerChoice) {
         return score("It's a tie!");
@@ -30,41 +28,72 @@ function playRound(playerSelection) {
 }
 
 // --Play of the Player--
-const btn = document.querySelectorAll("button");
-btn.forEach((button => {
-    button.addEventListener('click', () => {playRound(button.className)})
-})); 
+const btnR = document.querySelector(".rock");
+btnR.addEventListener("click", () => {playRound("rock")});
+const btnP = document.querySelector(".paper");
+btnP.addEventListener("click", () => {playRound("paper")});
+const btnS = document.querySelector(".scissors");
+btnS.addEventListener("click", () => {playRound("scissors")});
+//const btn = document.querySelectorAll("button");
+//btn.forEach((button => {
+//    button.addEventListener('click', () => {playRound(button.className)})
+//})); 
 
 // --Score--
 function score(text) {
     let result = text.toLowerCase();
-    //let humanScore = 0;
-    //let compScore = 0;
-    //let ties = 0;
     let winner = result.slice (4, 7);
         if (winner === "win") {
             humanScore++;
-            console.log(winner, humanScore, compScore);
+            //console.log(winner, humanScore, compScore, ties);
         }else if (winner === "los") {
             compScore++;
-            console.log(winner, humanScore, compScore);
+            //console.log(winner, humanScore, compScore, ties);
         }else {
             ties++;
-            console.log(winner, humanScore, compScore);
-        } return (winner, humanScore, compScore, ties);
+            //console.log(winner, humanScore, compScore, ties);
+        } return (print(humanScore, compScore, ties));
 }
 let humanScore = 0;
 let compScore = 0;
 let ties = 0;
-const playerScore = document.querySelector(".playerScore");
-playerScore.textContent = `${humanScore}`
-const computerScore = document.querySelector(".computerScore");
-computerScore.textContent = `${compScore}`;
-const tie = document.querySelector(".ties ");
-tie.textContent = `${ties}`
 
+// --Print to Score--
+function print(pScore, cScore, tScore) {
+    document.getElementById("playerScore").innerHTML = humanScore;
+    document.getElementById("computerScore").innerHTML = compScore;
+    document.getElementById("ties").innerHTML = ties;
 
+    if(humanScore == 5 || compScore == 5) {ending(humanScore, compScore)};
+};
 
+function ending(humanScore, compScore) {
+    const game = document.querySelector(".buttons");
+    const score = document.querySelector(".score");
+    const win = document.querySelector(".announcer");
+
+    game.classList.add("endGame");
+    score.classList.add("endGame");
+    const msg = document.createElement("div");
+    msg.classList.add("endMsg");
+    if (humanScore == 5) {
+        msg.textContent = `Congrats! You won by ${humanScore} X ${compScore}!`;
+    } else {
+        msg.textContent = `Too bad. You lost by ${humanScore} X ${compScore}!`;
+    };
+    const newGame = document.createElement("button");
+    newGame.setAttribute("id", "newGame");
+    newGame.innerHTML = "Restart";
+    newGame.addEventListener("click", () => {
+        score.classList.remove("endGame");
+        game.classList.remove("endGame");
+        humanScore = 0;
+        compScore = 0;
+        ties = 0;
+    })
+    win.appendChild(msg);
+    win.appendChild(newGame);
+}
 // --Game of 5 Rounds--
 /*function game(){
     let playerScore = 0;
