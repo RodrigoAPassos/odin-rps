@@ -57,6 +57,7 @@ function score(text) {
 let humanScore = 0;
 let compScore = 0;
 let ties = 0;
+let finish = false;
 
 // --Print to Score--
 function print(pScore, cScore, tScore) {
@@ -64,35 +65,40 @@ function print(pScore, cScore, tScore) {
     document.getElementById("computerScore").innerHTML = compScore;
     document.getElementById("ties").innerHTML = ties;
 
-    if(humanScore == 5 || compScore == 5) {ending(humanScore, compScore)};
+    if((humanScore == 5 && finish == false) || (compScore == 5 && finish == false)) {ending(humanScore, compScore)};
 };
 
+// --End score and Restart--
 function ending(humanScore, compScore) {
     const game = document.querySelector(".buttons");
     const score = document.querySelector(".score");
+    const scoreT = document.querySelector(".tie");
     const win = document.querySelector(".announcer");
 
     game.classList.add("endGame");
     score.classList.add("endGame");
+    scoreT.classList.add("endGame");
     const msg = document.createElement("div");
     msg.classList.add("endMsg");
-    if (humanScore == 5) {
-        msg.textContent = `Congrats! You won by ${humanScore} X ${compScore}!`;
-    } else {
-        msg.textContent = `Too bad. You lost by ${humanScore} X ${compScore}!`;
-    };
+
     const newGame = document.createElement("button");
     newGame.setAttribute("id", "newGame");
     newGame.innerHTML = "Restart";
     newGame.addEventListener("click", () => {
-        score.classList.remove("endGame");
-        game.classList.remove("endGame");
-        humanScore = 0;
-        compScore = 0;
-        ties = 0;
+        location.reload();  
     })
+
+    if (humanScore == 5 && finish == false) {
+        msg.textContent = `Congrats! You won by ${humanScore} X ${compScore}!`;
+        finish = true;
+    } else if(compScore == 5 && finish == false) {
+        msg.textContent = `Too bad. You lost by ${humanScore} X ${compScore}!`;
+        finish = true;
+    };
+
     win.appendChild(msg);
     win.appendChild(newGame);
+    return;
 }
 // --Game of 5 Rounds--
 /*function game(){
