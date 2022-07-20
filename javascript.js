@@ -9,6 +9,7 @@ function computerPlay () {
 function playRound(playerSelection) {
     let playerChoice = playerSelection;
     let computerChoice = computerPlay();
+    printChat(playerChoice, computerChoice);
 
     if (playerChoice === computerChoice) {
         return score("It's a tie!");
@@ -25,6 +26,70 @@ function playRound(playerSelection) {
     }else /*if (playerChoice === "rock" && computerChoice === "paper")*/ {
         return score("You Lose! Paper beats Rock");
     }
+}
+
+// --Print on Chat--
+function printChat (playerChoice, computerChoice) {
+    // -create the list-
+    const gameChat = document.querySelector("ul");
+    const playerText = document.createElement("li");
+    playerText.classList.add("playerPlay");
+    const compText = document.createElement("li");
+    compText.classList.add("computerPlay");
+
+    // -create the img for player-
+    if (playerChoice == "rock") {
+        const playerImg = document.createElement("img");
+        playerImg.setAttribute("src", "https://emojitool.com/img/whatsapp/2.21.23.23/raised-fist-1001.png");
+        playerImg.setAttribute("height", "50px");
+        playerImg.setAttribute("width", "50px");
+        playerText.innerHTML = "You: ";
+        playerText.appendChild(playerImg);
+        gameChat.insertBefore(playerText, gameChat.firstChild);
+    } else if (playerChoice == "paper") {
+        const playerImg = document.createElement("img");
+        playerImg.setAttribute("src", "https://emojitool.com/img/whatsapp/2.21.23.23/hand-with-fingers-splayed-3003.png");
+        playerImg.setAttribute("height", "50px");
+        playerImg.setAttribute("width", "50px");
+        playerText.innerHTML = "You: ";
+        playerText.appendChild(playerImg);
+        gameChat.insertBefore(playerText, gameChat.firstChild);
+    } else if (playerChoice == "scissors") {
+        const playerImg = document.createElement("img");
+        playerImg.setAttribute("src", "https://emojitool.com/img/whatsapp/2.21.23.23/victory-hand-3483.png");
+        playerImg.setAttribute("height", "50px");
+        playerImg.setAttribute("width", "50px");
+        playerText.innerHTML = "You: ";
+        playerText.appendChild(playerImg);
+        gameChat.insertBefore(playerText, gameChat.firstChild);
+    } 
+    // -create img for computer- 
+    if (computerChoice == "rock") {
+        const computerImg = document.createElement("img");
+        computerImg.setAttribute("src", "https://emojitool.com/img/whatsapp/2.21.23.23/raised-fist-1001.png");
+        computerImg.setAttribute("height", "50px");
+        computerImg.setAttribute("width", "50px");
+        compText.innerHTML = "Computer: ";
+        compText.appendChild(computerImg);
+        gameChat.insertBefore(compText, gameChat.firstChild);
+    } else if (computerChoice == "paper") {
+        const computerImg = document.createElement("img");
+        computerImg.setAttribute("src", "https://emojitool.com/img/whatsapp/2.21.23.23/hand-with-fingers-splayed-3003.png");
+        computerImg.setAttribute("height", "50px");
+        computerImg.setAttribute("width", "50px");
+        compText.innerHTML = "Computer: ";
+        compText.appendChild(computerImg);
+        gameChat.insertBefore(compText, gameChat.firstChild);
+    } else if (computerChoice == "scissors") {
+        const computerImg = document.createElement("img");
+        computerImg.setAttribute("src", "https://emojitool.com/img/whatsapp/2.21.23.23/victory-hand-3483.png");
+        computerImg.setAttribute("height", "50px");
+        computerImg.setAttribute("width", "50px");
+        compText.innerHTML = "Computer: ";
+        compText.appendChild(computerImg);
+        gameChat.insertBefore(compText, gameChat.firstChild);
+    }
+
 }
 
 // --Play of the Player--
@@ -63,21 +128,29 @@ let finish = false;
 function print(pScore, cScore, tScore) {
     document.getElementById("playerScore").innerHTML = humanScore;
     document.getElementById("computerScore").innerHTML = compScore;
-    document.getElementById("ties").innerHTML = ties;
+    //document.getElementById("ties").innerHTML = ties;
 
     if((humanScore == 5 && finish == false) || (compScore == 5 && finish == false)) {ending(humanScore, compScore)};
 };
 
 // --End score and Restart--
 function ending(humanScore, compScore) {
-    const game = document.querySelector(".buttons");
+    const game = document.querySelector(".textEntry");
     const score = document.querySelector(".score");
-    const scoreT = document.querySelector(".tie");
+    const chat = document.querySelector("ul");
+    const contact = document.querySelector(".contact");
     const win = document.querySelector(".announcer");
+    const btnR = document.querySelector(".rock");
+    const btnP = document.querySelector(".paper");
+    const btnS = document.querySelector(".scissors");
 
+    btnR.setAttribute("disabled", "");
+    btnP.setAttribute("disabled", "");
+    btnS.setAttribute("disabled", "");
     game.classList.add("endGame");
     score.classList.add("endGame");
-    scoreT.classList.add("endGame");
+    chat.classList.add("endGame");
+    contact.classList.add("endGame");
     const msg = document.createElement("div");
     msg.classList.add("endMsg");
 
