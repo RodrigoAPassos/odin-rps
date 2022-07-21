@@ -59,7 +59,7 @@ body {
 
 .chat {
     flex: 1 0 auto;
-    max-height: 580px;
+    max-height: calc(100vh - 220px);
     overflow: auto;
 }
 
@@ -184,7 +184,7 @@ ul {
 }
 
 .endMsg {
-    font-size: xx-large;
+    font-size: x-large;
     color: white;
 }
 
