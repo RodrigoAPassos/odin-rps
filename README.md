@@ -1,7 +1,11 @@
-# odin-rps
+# Rock Paper Scissors
 
-"We’re going to make a simple implementation of grade-school classic 'rock paper scissors'. For the moment we’re just going to play the game from the browser console, but we will revisit this project in a later lesson and add a Graphical User Interface with buttons and text.
+The classic "Rock, Paper, Scissors" with an UI inspired in Whatsapp App.
 
-Now that we can manipulate the DOM, it’s time to revisit Rock Paper Scissors and add a simple UI to it."
++ First to make 5 wins;
 
-Finished this project for now, the ui was inspired in whatsapp as you can see (i imagine XD).
+Click in the [Live Preview](https://rodrigoapassos.github.io/odin-rps/) to see and use the most recent stable version.
+
+## A Project from Odin Project JavaScript Course
+
+All the information about the assignment can be found [here](https://www.theodinproject.com/lessons/foundations-rock-paper-scissors).
